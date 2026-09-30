@@ -1,14 +1,15 @@
 {
-  "name": "sites-project",
+  "name": "gigle-local-whiteboard",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
-    "start": "wrangler dev --config dist/server/wrangler.json",
+    "dev": "npm run build:local && node local-server.mjs",
+    "build": "vite build --config vite.local.config.ts",
+    "build:local": "vite build --config vite.local.config.ts",
+    "start": "node local-server.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },
