@@ -1,40 +1,31 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Local data and generated output
+/.cache/
+/:memory:.ses
+/data/user/
+/frontend/node_modules/
+/frontend/.cache/
+/frontend/.next/
+/frontend/.vinext/
+/frontend/dist/
+/frontend/local-site/
+/frontend/.wrangler/
+/frontend/outputs/
+/frontend/work/
+/frontend/coverage/
+/personal learning agent/JIT-Harness-Edu/.venv/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/.vinext/
-/out/
-
-# misc
+# Machine-specific files and secrets
 .DS_Store
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
 *.pem
-
-# debug
+*.key
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-
-# local environment
-.env*
-
-# deployment and generated files
-.vercel
-next-env.d.ts
-/dist/
-/local-site/
-*.tsbuildinfo
-/.wrangler/
-/outputs/
-/work/

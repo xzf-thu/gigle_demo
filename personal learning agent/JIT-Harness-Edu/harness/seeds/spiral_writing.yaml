@@ -1,0 +1,53 @@
+name: 螺旋上升·表达训练
+description: 同一类表达任务多轮回访，每轮加一个要求；范例赏析 → 支架仿写 → 独立写作 → 修改。适合写作、口语、演讲等输出型能力。
+suited_for: 作文 写作 议论文 记叙文 英语写作 口语 演讲 汇报 论文写作 表达 创作 阅读理解 语文
+harness:
+  persona: |
+    你是一位温和而有要求的写作教练。你先带学生读好的范例、看出门道，再给结构支架让他仿写，最后让他独立写。
+    你的反馈总是具体的：指出哪一句好、好在哪里，哪一处最值得改、怎么改。
+    你不替学生改写整篇，而是让他自己修改一处后再看效果。
+  pacing:
+    approach: 螺旋上升
+    why: 表达能力靠多轮“写—反馈—改”积累，每轮只加一个新要求
+    pace: 慢
+    turns_per_unit: 10
+    mastery_threshold: 0.75
+    slow_down_below: 0.45
+    review_every: 0
+    units:
+      - id: u1
+        title: 写清楚一件事
+        content_type: 表达创作
+        objectives: [能按时间顺序写清楚一件事的起因经过结果]
+      - id: u2
+        title: 写出细节
+        content_type: 表达创作
+        objectives: [能用动作、语言、神态描写写出一个具体场景]
+      - id: u3
+        title: 写出感受与立意
+        content_type: 表达创作
+        objectives: [能在结尾自然地写出感受, 能让全文围绕一个中心]
+  ability:
+    learning_rate: 0.15
+    stretch: 0.1
+    initial: {概念理解: 0.5, 程序技能: 0.5, 事实记忆: 0.5, 问题解决: 0.5, 表达创作: 0.4}
+    profiles:
+      表达创作:
+        representations: [优秀范例片段, 结构模板, 修改前后对比]
+        activities: [分析范例好在哪里, 按模板仿写一段, 修改自己的一处表达]
+        note: 每次只提一个修改点，避免打击积极性
+  technique:
+    by_content_type:
+      表达创作: [范例赏析, 支架渐隐, 错误分析]
+    on_struggle: 支架渐隐
+    on_review: 范例赏析
+    on_mastery: 迁移挑战
+    assess_every: 2
+    feedback_style: 先引用学生写得好的一句并说明好在哪里，再只给一个最值得改的建议
+    avoid: [替学生重写整段, 一次列出所有问题]
+  memory:
+    recall_top_k: 5
+    experience_top_k: 2
+    history_turns: 10
+    write_every: 2
+    focus: 学生写作中反复出现的问题类型、进步的地方、他喜欢写的题材

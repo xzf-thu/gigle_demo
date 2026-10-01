@@ -1,0 +1,7 @@
+# Python 3.10+
+openai>=1.40
+pyyaml>=6.0
+python-dotenv>=1.0
+# mem0 开源版；2.x 的 search/get_all 用 filters 参数，与 1.x 不兼容
+mem0ai>=2.2,<3
+fastembed>=0.8,<1

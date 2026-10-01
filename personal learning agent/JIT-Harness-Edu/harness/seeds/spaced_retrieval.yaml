@@ -1,0 +1,57 @@
+name: 间隔检索·记忆强化
+description: 每次少量新内容，大比例间隔复习与主动回忆，配合记忆术；频繁小测、快节奏。适合需要长期准确记住的内容。
+suited_for: 英语单词 词汇 外语 古诗文 历史年代 术语 公式记忆 医学 法律条文 考试背诵 事实 记忆
+harness:
+  persona: |
+    你是一位轻快、鼓励型的记忆教练。你知道“回忆比重读更能记住”，所以总是让学生先试着想起来，再给反馈。
+    你的讲解很短，练习很多；每学几个新内容就回头抽查旧内容。
+    你会帮学生造口诀和联想，也鼓励他自己造。
+  pacing:
+    approach: 间隔检索
+    why: 记忆类内容的关键是间隔重复和主动回忆，而不是一次讲透
+    pace: 快
+    turns_per_unit: 6
+    mastery_threshold: 0.85
+    slow_down_below: 0.5
+    review_every: 3
+    units:
+      - id: u1
+        title: 核心词汇第一组（10 个）
+        content_type: 事实记忆
+        objectives: [看中文能拼写出英文, 能用该词造一个简单句]
+      - id: u2
+        title: 核心词汇第二组（10 个）
+        content_type: 事实记忆
+        objectives: [看中文能拼写出英文, 能区分形近词]
+      - id: u3
+        title: 在语境中使用
+        content_type: 表达创作
+        objectives: [能在一段短文中正确使用学过的 5 个词]
+  ability:
+    learning_rate: 0.25
+    stretch: 0.1
+    initial: {概念理解: 0.5, 程序技能: 0.5, 事实记忆: 0.4, 问题解决: 0.5, 表达创作: 0.4}
+    profiles:
+      事实记忆:
+        representations: [口诀, 词根词缀拆分, 图像联想, 例句]
+        activities: [看中文说英文, 填空, 听写, 自己造记忆口诀]
+        note: 每次只引入 3~5 个新项目，旧项目优先抽查上次错的
+      表达创作:
+        representations: [范例短文]
+        activities: [仿写句子, 用指定词写三句话]
+  technique:
+    by_content_type:
+      事实记忆: [检索练习, 记忆术, 间隔重复]
+      表达创作: [范例赏析, 支架渐隐, 错误分析]
+    on_struggle: 记忆术
+    on_review: 间隔重复
+    on_mastery: 迁移挑战
+    assess_every: 1
+    feedback_style: 答对立刻肯定并加一点难度；答错先给首字母或联想提示，再让学生重试一次
+    avoid: [大段讲解, 一次给太多新内容]
+  memory:
+    recall_top_k: 6
+    experience_top_k: 1
+    history_turns: 6
+    write_every: 2
+    focus: 学生总是记错或混淆的具体条目；对他有效的记忆口诀

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>文稿 Studio</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="libView">
+  <div class="lib">
+    <header class="lib-head">
+      <div style="min-width:0">
+        <nav class="crumb" id="crumb" aria-label="路径"></nav>
+        <h1 class="lib-title" id="libTitle">文稿</h1>
+      </div>
+      <div class="seg" id="sortSeg" role="group" aria-label="排序">
+        <button data-sort="date" aria-pressed="true">日期</button>
+        <button data-sort="name" aria-pressed="false">名称</button>
+        <button data-sort="type" aria-pressed="false">类型</button>
+      </div>
+      <button class="new-folder" id="newFolderBtn" type="button">＋ 新建文件夹</button>
+    </header>
+    <label class="search-field" id="searchField" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索文稿和文件夹" autocomplete="off">
+    </label>
+    <div class="grid" id="grid"></div>
+  </div>
+  <nav class="tabbar" aria-label="主导航">
+    <button data-tab="docs" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="5" height="7" rx="1.2"/><rect x="9.5" y="4" width="5" height="7" rx="1.2"/><rect x="16" y="4" width="5" height="7" rx="1.2"/><rect x="3" y="13" width="5" height="7" rx="1.2"/><rect x="9.5" y="13" width="5" height="7" rx="1.2"/><rect x="16" y="13" width="5" height="7" rx="1.2"/></svg>文稿</button>
+    <button data-tab="search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>搜索</button>
+    <button data-tab="fav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>收藏夹</button>
+  </nav>
+</div>
+
+<section class="studio" id="studioView" hidden aria-label="新建项目">
+  <header class="nb-top">
+    <button class="back" id="backBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg><span id="backLabel">文稿</span></button>
+    <input class="nb-title" id="nbTitle" placeholder="未命名项目" aria-label="项目名称" autocomplete="off">
+    <span class="nb-where">保存到 <b id="whereLabel">文稿</b></span>
+  </header>
+  <div class="nb-grid">
+    <aside class="panel" id="srcPanel" aria-label="来源">
+      <div class="panel-h">来源 <small id="srcCount">0 个</small></div>
+      <div class="panel-body">
+        <button class="add-src" id="addSrcBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>添加来源</button>
+        <div class="src-box" id="srcBox">
+          <div class="modes" id="modes" role="group" aria-label="来源类型">
+            <button data-mode="url" aria-pressed="true">网址</button>
+            <button data-mode="pdf" aria-pressed="false">PDF</button>
+            <button data-mode="image" aria-pressed="false">图片</button>
+            <button data-mode="video" aria-pressed="false">视频</button>
+            <button data-mode="text" aria-pressed="false">文本</button>
+            <button data-mode="websearch" aria-pressed="false">Web Search</button>
+          </div>
+          <form class="src-row" id="srcForm">
+            <input id="srcInput" autocomplete="off" aria-label="来源输入">
+            <button class="icon-btn" id="srcSubmit" type="submit" aria-label="添加" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </form>
+          <label class="drop" id="drop" hidden>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            <span>拖入 PDF 或图片，或点击选择文件</span>
+            <input type="file" id="fileInput" accept="application/pdf,.pdf,image/*" multiple>
+          </label>
+          <p class="err" id="srcErr" role="alert" hidden></p>
+        </div>
+        <ul class="src-list" id="srcList"></ul>
+        <div class="src-empty" id="srcEmpty">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>
+          添加的来源会显示在这里<br>支持网页、PDF、图片、视频、文本和 AI Web Search
+        </div>
+      </div>
+    </aside>
+
+    <main class="panel chat" aria-label="对话">
+      <div class="chat-log" id="chatLog" aria-live="polite"></div>
+      <form class="composer" id="chatForm">
+        <input id="chatInput" autocomplete="off" aria-label="输入来源或内容">
+        <span class="count" id="chatCount">0 个来源</span>
+        <button class="icon-btn" id="chatSubmit" type="submit" aria-label="发送" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+      </form>
+      <p class="fine">这里的输入与左侧来源输入框同步，回车即添加为来源。</p>
+    </main>
+
+    <aside class="panel" aria-label="输出格式">
+      <div class="panel-h">输出格式</div>
+      <div class="panel-body">
+        <div class="formats" id="formats" role="radiogroup" aria-label="输出格式"></div>
+        <p class="lock-note" id="lockNote" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <span>已插入 PDF，输出格式固定为 PDF。移除 PDF 后可选择其他格式。</span>
+        </p>
+      </div>
+      <div class="studio-foot">
+        <div class="api-key-box" id="apiKeyBox" hidden><label for="apiKeyInput">DeepSeek API 密钥（仅存本机内存）</label><input id="apiKeyInput" type="password" autocomplete="off" placeholder="粘贴密钥"><button id="apiKeySave" type="button">启用</button></div>
+        <button class="create" id="createBtn" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Create Item
+        </button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="menu" id="menu" role="menu" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
