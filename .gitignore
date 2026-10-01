@@ -1,7 +1,6 @@
 # Local data and generated output
 /.cache/
 /:memory:.ses
-/data/user/
 /frontend/node_modules/
 /frontend/.cache/
 /frontend/.next/
@@ -21,6 +20,8 @@ __pycache__/
 *.db
 *.sqlite
 *.sqlite3
+!/data/user/learning_agent_data/mem0/history.db
+!/data/user/learning_agent_data/mem0/qdrant/collection/edu_memory/storage.sqlite
 .env
 .env.*
 *.pem
